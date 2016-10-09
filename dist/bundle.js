@@ -21429,13 +21429,16 @@
 			};
 		},
 		render: function () {
-			//evar currentStage = 4;
 			var stageList = [1, 2, 3, 4, 5, 6];
 			return React.createElement(
 				'div',
 				{ className: 'loader' },
 				React.createElement(ProgressBar, { stageList: stageList, currentStage: this.state.currentStage }),
-				React.createElement('input', { type: 'button', onClick: this.nextStage, value: 'Next' })
+				React.createElement(
+					'div',
+					{ className: 'input-btn' },
+					React.createElement('input', { type: 'button', onClick: this.nextStage, value: 'Next' })
+				)
 			);
 		},
 		nextStage: function () {
@@ -21465,8 +21468,8 @@
 			var stageList = this.props.stageList.map(function (item) {
 				return React.createElement(
 					'li',
-					{ className: 'stage' },
-					React.createElement('div', { className: classNames("checkpoint", { glow: item <= currentStage }) }),
+					{ className: 'stage', key: item },
+					React.createElement('div', { ref: "stage_" + item, className: classNames("checkpoint", { glow: item <= currentStage }) }),
 					React.createElement('div', { className: classNames("inner-progress", { active: item <= currentStage }) })
 				);
 			});
@@ -21517,7 +21520,7 @@
 
 
 	// module
-	exports.push([module.id, ".progress-bar {\n  width: calc( 100% - 100px);\n  margin: 100px auto;\n  padding: 0;\n}\n.progress-bar .stage {\n  width: 16%;\n  position: relative;\n  list-style-type: none;\n  float: left;\n  color: gray;\n  border: 1px solid;\n  height: 2px;\n  /*\t\t\t&:after{\n\t\t\tposition: relative;\n\t\t\tright: 30px;\n\t\t\tbottom: 15px;\n\t\t\theight: 30px;\n\t\t    width: 30px;\n\t\t    line-height: 30px;\n\t\t    border: 1px solid;\n\t\t    border-radius: 50%;\n\t\t     display: inline-block;\n\t\t    content: no-open-quote;\n\t\t    content: counter(step);\n\t\t    text-align: center;\n\t\t}*/\n}\n.progress-bar .stage .checkpoint {\n  position: absolute;\n  right: -15px;\n  bottom: -15px;\n  height: 30px;\n  width: 30px;\n  line-height: 30px;\n  border: 1px solid;\n  border-radius: 50%;\n  display: inline-block;\n  content: no-open-quote;\n  content: counter(step);\n  text-align: center;\n  transition: background-color 0.5s;\n  transition-delay: 3s;\n}\n.progress-bar .stage .glow {\n  background-color: blue;\n}\n.progress-bar .stage .inner-progress {\n  width: 0%;\n  height: 100%;\n  display: inline-block;\n  position: absolute;\n  left: 0px;\n  transition: width 3s;\n}\n.progress-bar .stage .active {\n  width: 100%;\n  background-color: blue;\n}\n", ""]);
+	exports.push([module.id, ".loader .progress-bar {\n  width: calc( 100% - 100px);\n  height: 40px;\n  margin: 100px auto;\n  padding: 0;\n}\n.loader .progress-bar .stage {\n  width: 16%;\n  position: relative;\n  list-style-type: none;\n  float: left;\n  color: gray;\n  height: 3px;\n  background-color: #ebb0b0;\n}\n.loader .progress-bar .stage .checkpoint {\n  position: absolute;\n  background-color: #ebb0b0;\n  z-index: 3;\n  right: -15px;\n  bottom: -15px;\n  height: 30px;\n  width: 30px;\n  line-height: 30px;\n  border-radius: 50%;\n  display: inline-block;\n  content: no-open-quote;\n  content: counter(step);\n  text-align: center;\n  transition: background-color 0.2s;\n  transition-delay: 2s;\n}\n.loader .progress-bar .stage .glow {\n  background-color: blue;\n}\n.loader .progress-bar .stage .inner-progress {\n  width: 0%;\n  height: 100%;\n  display: inline-block;\n  position: absolute;\n  left: 0px;\n  transition: width 2s;\n}\n.loader .progress-bar .stage .active {\n  width: 100%;\n  background-color: blue;\n}\n.loader .input-btn input {\n  margin: auto;\n  display: block;\n  width: 80px;\n}\n", ""]);
 
 	// exports
 

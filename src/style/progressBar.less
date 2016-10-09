@@ -1,70 +1,67 @@
-.progress-bar{
-	width:calc(~" 100% - 100px");
-	margin:100px auto;
-	padding: 0;
-	.stage{
-		width:16%;
-		position: relative;
-		//height: 15px;
-		list-style-type: none;
-		float: left;
-		color:gray;
-		border:1px solid;
-		height: 2px;
-		//text-align: center;
-/*			&:after{
+.loader{
+
+	.progress-bar{
+		width:calc(~" 100% - 100px");
+		height: 40px;
+		margin:100px auto;
+		padding: 0;
+		.stage{
+			width:16%;
 			position: relative;
-			right: 30px;
-			bottom: 15px;
-			height: 30px;
-		    width: 30px;
-		    line-height: 30px;
-		    border: 1px solid;
-		    border-radius: 50%;
-		     display: inline-block;
-		    content: no-open-quote;
-		    content: counter(step);
-		    text-align: center;
-		}*/
+			list-style-type: none;
+			float: left;
+			color:gray;
+			height: 3px;
+			background-color: #ebb0b0;;
+			.checkpoint{
+				position: absolute;
+				background-color: #ebb0b0;;
+				z-index: 3;
+				right: -15px;
+	    		bottom: -15px;
+				height: 30px;
+			    width: 30px;
+			    line-height: 30px;
+			    border-radius: 50%;
+			     display: inline-block;
+			    content: no-open-quote;
+			    content: counter(step);
+			    text-align: center;
+			    transition: background-color .2s;
+			    transition-delay: 2s;
+			}
+			.glow{
+				background-color: blue;
+			}
+			.inner-progress{
+				width: 0%;
+				height: 100%;
+				display: inline-block;
+				position: absolute;
+				left: 0px;
+				transition: width 2s;
 
-		.checkpoint{
-			position: absolute;
-			right: -15px;
-    		bottom: -15px;
-			height: 30px;
-		    width: 30px;
-		    line-height: 30px;
-		    border: 1px solid;
-		    border-radius: 50%;
-		     display: inline-block;
-		    content: no-open-quote;
-		    content: counter(step);
-		    text-align: center;
-		    transition: background-color .5s;
-		    transition-delay: 3s;
-		}
-		.glow{
-			background-color: blue;
-		}
-		.inner-progress{
-			width: 0%;
-			height: 100%;
-			display: inline-block;
-			position: absolute;
-			left: 0px;
-			transition: width 3s;
+			}
 
-		}
+			.active{
+				width:100%;
+				background-color: blue;
 
-		.active{
-			width:100%;
-			background-color: blue;
+			}
+
+			
 
 		}
 
 		
-
 	}
 
+	.input-btn{
+			input{
+				margin: auto;
+	    		display: block;
+	    		width: 80px;
+			}
+		}
 
 }
