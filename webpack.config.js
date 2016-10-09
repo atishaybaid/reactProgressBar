@@ -4,6 +4,7 @@ module.exports = {
 		filename:'bundle.js',
 		path:'./dist'
 	},
+	watch:true,
 	module:{
 		loaders:[
 		{
@@ -13,7 +14,11 @@ module.exports = {
 			query:{
 				presets:['react']
 			}
-		}
+		},
+		{
+	        test: /\.less$/,
+	        loader: "style!css!less"
+      	}
 		]
 	},
 	 resolve: {
