@@ -21423,15 +21423,28 @@
 	var Loader = React.createClass({
 		displayName: 'Loader',
 
+		getInitialState: function () {
+			return {
+				currentStage: 0
+			};
+		},
 		render: function () {
-			var currentStage = 4;
+			//evar currentStage = 4;
 			var stageList = [1, 2, 3, 4, 5, 6];
 			return React.createElement(
 				'div',
 				{ className: 'loader' },
-				React.createElement(ProgressBar, { stageList: stageList, currentStage: currentStage })
+				React.createElement(ProgressBar, { stageList: stageList, currentStage: this.state.currentStage }),
+				React.createElement('input', { type: 'button', onClick: this.nextStage, value: 'Next' })
 			);
+		},
+		nextStage: function () {
+			var nextStage = this.state.currentStage + 1;
+			this.setState({
+				currentStage: nextStage
+			});
 		}
+
 	});
 
 	module.exports = Loader;
@@ -21441,23 +21454,26 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var classNames = __webpack_require__(178);
 
 	var ProgressBar = React.createClass({
-		displayName: "ProgressBar",
+		displayName: 'ProgressBar',
 
 
 		render: function () {
+			var currentStage = this.props.currentStage;
 			var stageList = this.props.stageList.map(function (item) {
 				return React.createElement(
-					"li",
-					{ className: "stage" },
-					item
+					'li',
+					{ className: 'stage' },
+					React.createElement('div', { className: classNames("checkpoint", { glow: item <= currentStage }) }),
+					React.createElement('div', { className: classNames("inner-progress", { active: item <= currentStage }) })
 				);
 			});
 
 			return React.createElement(
-				"ol",
-				{ className: "progress-bar" },
+				'ol',
+				{ className: 'progress-bar' },
 				stageList
 			);
 		}
@@ -21501,7 +21517,7 @@
 
 
 	// module
-	exports.push([module.id, ".progress-bar {\n  color: blue;\n}\n", ""]);
+	exports.push([module.id, ".progress-bar {\n  width: calc( 100% - 100px);\n  margin: 100px auto;\n  padding: 0;\n}\n.progress-bar .stage {\n  width: 16%;\n  position: relative;\n  list-style-type: none;\n  float: left;\n  color: gray;\n  border: 1px solid;\n  height: 2px;\n  /*\t\t\t&:after{\n\t\t\tposition: relative;\n\t\t\tright: 30px;\n\t\t\tbottom: 15px;\n\t\t\theight: 30px;\n\t\t    width: 30px;\n\t\t    line-height: 30px;\n\t\t    border: 1px solid;\n\t\t    border-radius: 50%;\n\t\t     display: inline-block;\n\t\t    content: no-open-quote;\n\t\t    content: counter(step);\n\t\t    text-align: center;\n\t\t}*/\n}\n.progress-bar .stage .checkpoint {\n  position: absolute;\n  right: -15px;\n  bottom: -15px;\n  height: 30px;\n  width: 30px;\n  line-height: 30px;\n  border: 1px solid;\n  border-radius: 50%;\n  display: inline-block;\n  content: no-open-quote;\n  content: counter(step);\n  text-align: center;\n  transition: background-color 0.5s;\n  transition-delay: 3s;\n}\n.progress-bar .stage .glow {\n  background-color: blue;\n}\n.progress-bar .stage .inner-progress {\n  width: 0%;\n  height: 100%;\n  display: inline-block;\n  position: absolute;\n  left: 0px;\n  transition: width 3s;\n}\n.progress-bar .stage .active {\n  width: 100%;\n  background-color: blue;\n}\n", ""]);
 
 	// exports
 
@@ -21810,6 +21826,59 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+
+	(function () {
+		'use strict';
+
+		var hasOwn = {}.hasOwnProperty;
+
+		function classNames() {
+			var classes = [];
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+
+			return classes.join(' ');
+		}
+
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	})();
 
 /***/ }
 /******/ ]);

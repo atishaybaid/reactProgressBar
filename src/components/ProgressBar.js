@@ -1,13 +1,16 @@
 var React = require('react');
+var classNames = require('classnames');
 
 
 var ProgressBar = React.createClass({
 
 render:function(){
+	var currentStage = this.props.currentStage;
 	var stageList = this.props.stageList.map(function(item){
 		return (
 			<li className="stage">
-				{item}
+				<div className={classNames("checkpoint",{glow:item <= currentStage})}></div>
+				<div className={classNames("inner-progress",{active:item <= currentStage})}></div>
 			</li>
 			)
 	})
@@ -16,6 +19,8 @@ render:function(){
 			<ol className="progress-bar">
 			{stageList}
 			</ol>
+
+
 		);
 	}
 
