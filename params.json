@@ -1,0 +1,6 @@
+{
+  "name": "Reactprogressbar",
+  "tagline": "",
+  "body": "# reactProgressBar\r\n\r\n### A progress bar created in react\r\n\r\n\r\nSteps to run <br/>\r\n1.clone the repo <br/>\r\n2.npm install <br/>\r\n3.webpack <br/>\r\n4.cd dist <br/>\r\n5.use any server to fetch the index.html\r\n\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
